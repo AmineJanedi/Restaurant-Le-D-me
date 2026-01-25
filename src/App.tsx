@@ -6,7 +6,7 @@ import emailjs from 'emailjs-com';
 
 
 const APP_CONFIG = {
-  restaurant: "Restaurant Le Dôme",
+  restaurant: "Restaurant Le Dôme 1",
   city: "Annonay",
   cuisine: "Gastronomie Française d'Excellence",
   phone: "+33475670943",

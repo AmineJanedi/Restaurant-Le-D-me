@@ -3,10 +3,11 @@ import { Star, MapPin, Clock, Phone, Instagram, ChevronRight, Sparkles, ChevronL
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import emailjs from 'emailjs-com';
+import "aos/dist/aos.css";
 
 
 const APP_CONFIG = {
-  restaurant: "Restaurant Le Dôme 1",
+  restaurant: "Restaurant Le Dôme",
   city: "Annonay",
   cuisine: "Gastronomie Française d'Excellence",
   phone: "+33475670943",
@@ -33,21 +34,22 @@ function Hero() {
   };
 
   return (
+    
     <section className="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden pt-20 md:pt-0">
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <div className="mb-6 flex justify-center" data-aos="fade-up">
-          <Sparkles size={32} className="text-amber-400" />
+          <Sparkles size={32} className="text-emerald-400" />
         </div>
 
         <h1 className="text-white mb-4 leading-tight" data-aos="fade-up" data-aos-delay="100">
           {APP_CONFIG.restaurant}
         </h1>
 
-        <p className="text-xl md:text-2xl text-amber-200 mb-2" data-aos="fade-up" data-aos-delay="200">
+        <p className="text-xl md:text-2xl text-emerald-200 mb-2" data-aos="fade-up" data-aos-delay="200">
           {APP_CONFIG.cuisine}
         </p>
 
-        <p className="text-lg text-amber-100 mb-12" data-aos="fade-up" data-aos-delay="300">
+        <p className="text-lg text-emerald-100 mb-12" data-aos="fade-up" data-aos-delay="300">
           Une expérience raffinée à {APP_CONFIG.city}
         </p>
 
@@ -68,13 +70,13 @@ function Hero() {
 
         <div className="flex flex-col md:flex-row justify-center gap-12 mt-20" data-aos="fade-up" data-aos-delay="500">
           <div className="text-white text-center">
-            <p className="text-4xl font-bold text-amber-300">{APP_CONFIG.rating}</p>
+            <p className="text-4xl font-bold text-emerald-300">{APP_CONFIG.rating}</p>
             <div className="flex gap-1 justify-center mt-2">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                <Star key={i} size={16} className="fill-emerald-400 text-emerald-400" />
               ))}
             </div>
-            <p className="text-sm text-amber-100 mt-3">Sur {APP_CONFIG.reviewCount} avis</p>
+            <p className="text-sm text-emerald-100 mt-3">Sur {APP_CONFIG.reviewCount} avis</p>
           </div>
         </div>
       </div>
@@ -104,7 +106,7 @@ function Reviews() {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           NOS CONVIVES PARLENT DE NOUS
         </h2>
 
@@ -122,7 +124,7 @@ function Reviews() {
             >
               <div className="flex gap-1 mb-6">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} size={18} className="fill-amber-400 text-amber-400" />
+                  <Star key={i} size={18} className="fill-emerald-400 text-emerald-400" />
                 ))}
               </div>
               <p className="text-gray-700 mb-6 leading-relaxed italic">"{review.text}"</p>
@@ -134,7 +136,7 @@ function Reviews() {
         <div className="text-center mt-16 pt-8 border-t border-gray-200">
           <p className="text-gray-600 text-sm">
             Excellence confirmée par {APP_CONFIG.reviewCount} clients - Note Google :
-            <span className="font-bold text-amber-700 ml-2">{APP_CONFIG.rating}/5</span>
+            <span className="font-bold text-emerald-700 ml-2">{APP_CONFIG.rating}/5</span>
           </p>
         </div>
       </div>
@@ -143,32 +145,57 @@ function Reviews() {
 }
 
 function Menu() {
+  const [activeCategory, setActiveCategory] = useState("Tous");
+
   const dishes = [
     {
-      name: "Foie gras poêlé",
-      description: "Avec chutney de figues et brioche toastée",
-      image: "https://restauranttandem.com/wp-content/uploads/2016/11/Entre%CC%81e-de-foie-gras-poe%CC%82le%CC%81.jpg.webp",
-      price: "28€"
+      name: "Nems de rougets à la tapenade",
+      category: "Entrées",
+      description: "Salade composée, sauce vierge aux tomates confites et olives noires",
+      image: "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg",
+      price: "18€"
     },
     {
-      name: "Huître en persillade",
-      description: "Sauce beurre blanc et échalotes",
-      image: "https://kissmychef.com/wp-content/uploads/2024/12/huitres_parmesan.png",
-      price: "22€"
+      name: "Salade Romaine au poulet croustillant",
+      category: "Entrées",
+      description: "Croûtons, copeaux de Parmesan, sauce César",
+      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+      price: "18€"
     },
     {
-      name: "Côte de veau fermier",
-      description: "Sauce moutarde ancienne, légumes de saison",
-      image: "https://www.la-viande.fr/sites/default/files/styles/facebook/public/recettes/images/C%C3%B4tes-de-veau-po%C3%AAl%C3%A9es%2C-f%C3%A8ves-aux-%C3%A9chalotes%2C-tomates-et-citrons-confits.jpg?itok=YwqxoMUv",
-      price: "36€"
+      name: "Risotto crémeux aux asperges vertes",
+      category: "Plats", // ✅ FIX (was Dessert)
+      description: "Pecorino",
+      image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
+      price: "17€"
     },
     {
-      name: "Soufflé au Grand Marnier",
-      description: "Crème anglaise vanille de Madagascar",
-      image: "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=600",
-      price: "16€"
+      name: "Gambas poêlées",
+      category: "Plats",
+      description: "Persillade citronnée",
+      image: "https://images.pexels.com/photos/699544/pexels-photo-699544.jpeg",
+      price: "21€"
+    },
+    {
+      name: "Dessert du jour",
+      category: "Desserts",
+      description: "Selon l’inspiration du chef",
+      image: "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg",
+      price: "7,50€"
+    },
+    {
+      name: "Crêpe Suzette",
+      category: "Desserts",
+      description: "Flambée au Grand Marnier, zestes d’orange confits",
+      image: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+      price: "10€"
     }
   ];
+
+  const filteredDishes =
+    activeCategory === "Tous"
+      ? dishes
+      : dishes.filter(dish => dish.category === activeCategory);
 
   const handleOrderClick = () => {
     const message = encodeURIComponent(`Bonjour, je souhaite commander chez ${APP_CONFIG.restaurant}`);
@@ -178,7 +205,7 @@ function Menu() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           NOS CRÉATIONS
         </h2>
 
@@ -189,15 +216,32 @@ function Menu() {
         <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
           Découvrez nos créations culinaires élaborées avec les meilleures matières premières et revisitées avec passion
         </p>
+        <div className="sticky top-20 z-20 bg-gray-50 py-4 mb-12">
+  <div className="flex justify-center gap-4 flex-wrap">
+    {["Tous", "Entrées", "Plats", "Desserts"].map(cat => (
+      <button
+        key={cat}
+        onClick={() => setActiveCategory(cat)}
+        className={`px-5 py-2 rounded-md font-semibold transition-all duration-300 ${
+          activeCategory === cat
+            ? "bg-emerald-700 text-white shadow-lg"
+            : "bg-white border hover:bg-gray-100"
+        }`}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+</div>
 
         <div className="space-y-6 mb-16">
-          {dishes.map((dish, idx) => (
+        {filteredDishes.map((dish, idx) => (
+
             <div
               key={idx}
               className="menu-item bg-white rounded-md p-8 border border-gray-100 flex flex-col md:flex-row gap-8 items-start md:items-center"
               data-aos="fade-up"
               data-aos-delay={100 + idx * 80}
-              style={{ animationDelay: `${idx * 0.15}s` }}
             >
               <div className="w-full md:w-40 h-40 flex-shrink-0 rounded-md overflow-hidden shadow-lg">
                 <img
@@ -209,7 +253,7 @@ function Menu() {
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{dish.name}</h3>
                 <p className="text-gray-600 leading-relaxed mb-4">{dish.description}</p>
-                <p className="text-amber-700 font-bold text-lg">{dish.price}</p>
+                <p className="text-emerald-700 font-bold text-lg">{dish.price}</p>
               </div>
             </div>
           ))}
@@ -252,7 +296,7 @@ function Gallery() {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           AMBIANCE & ATMOSPHÈRE
         </h2>
 
@@ -341,7 +385,7 @@ const handleSubmit = (e: React.FormEvent) => {
   return (
     <section id="reservation" className="py-24 bg-gray-50">
       <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           ACCÉDEZ À NOTRE TABLE
         </h2>
 
@@ -462,9 +506,9 @@ function InstagramSection() {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <Instagram size={48} className="mx-auto text-amber-700 mb-6" data-aos="fade-down" />
+        <Instagram size={48} className="mx-auto text-emerald-700 mb-6" data-aos="fade-down" />
 
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           SUIVEZ NOS CRÉATIONS
         </h2>
 
@@ -500,7 +544,7 @@ function Location() {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center mb-4 text-amber-700" data-aos="fade-up">
+        <h2 className="text-center mb-4 text-emerald-700" data-aos="fade-up">
           NOUS VOUS ACCUEILLONS
         </h2>
 
@@ -511,7 +555,7 @@ function Location() {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div className="flex gap-6" data-aos="fade-right">
-              <MapPin className="text-amber-700 flex-shrink-0 mt-1" size={28} />
+              <MapPin className="text-emerald-700 flex-shrink-0 mt-1" size={28} />
               <div>
                 <h4 className="font-bold text-lg text-gray-900 mb-3">Adresse</h4>
                 <p className="text-gray-700 leading-relaxed text-lg">{APP_CONFIG.address}</p>
@@ -519,7 +563,7 @@ function Location() {
             </div>
 
             <div className="flex gap-6" data-aos="fade-right" data-aos-delay="100">
-              <Clock className="text-amber-700 flex-shrink-0 mt-1" size={28} />
+              <Clock className="text-emerald-700 flex-shrink-0 mt-1" size={28} />
               <div>
                 <h4 className="font-bold text-lg text-gray-900 mb-3">Horaires d'ouverture</h4>
                 <p className="text-gray-700 mb-2">{APP_CONFIG.hours.weekday}</p>
@@ -529,12 +573,12 @@ function Location() {
             </div>
 
             <div className="flex gap-6" data-aos="fade-right" data-aos-delay="200">
-              <Phone className="text-amber-700 flex-shrink-0 mt-1" size={28} />
+              <Phone className="text-emerald-700 flex-shrink-0 mt-1" size={28} />
               <div>
                 <h4 className="font-bold text-lg text-gray-900 mb-3">Nous appeler</h4>
                 <button
                   onClick={handleCall}
-                  className="text-amber-700 hover:text-amber-800 font-bold text-lg transition-colors"
+                  className="text-emerald-700 hover:text-emerald-800 font-bold text-lg transition-colors"
                 >
                   {APP_CONFIG.phone}
                 </button>
@@ -568,7 +612,7 @@ function FloatingCTA() {
     <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40 md:hidden">
       <button
         onClick={handleCall}
-        className="w-14 h-14 rounded-full bg-amber-700 hover:bg-amber-800 text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+        className="w-14 h-14 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
         aria-label="Appeler"
         title="Appeler le restaurant"
       >

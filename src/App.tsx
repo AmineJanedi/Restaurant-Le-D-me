@@ -3,7 +3,6 @@ import { Star, MapPin, Clock, Phone, Instagram, ChevronRight, Sparkles, ChevronL
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import emailjs from 'emailjs-com';
-import "aos/dist/aos.css";
 
 
 const APP_CONFIG = {
@@ -164,7 +163,7 @@ function Menu() {
     },
     {
       name: "Risotto crémeux aux asperges vertes",
-      category: "Plats", // ✅ FIX (was Dessert)
+      category: "Plats",
       description: "Pecorino",
       image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg",
       price: "17€"
@@ -276,7 +275,7 @@ function Menu() {
 function Gallery() {
   const gallery = [
     {
-      image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "https://imgur.com/a/QvPqruJ",
       label: "Salle principale"
     },
     {
@@ -458,7 +457,9 @@ const handleSubmit = (e: React.FormEvent) => {
                 >
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => (
                     <option key={n} value={n}>{n} {n > 1 ? 'personnes' : 'personne'}</option>
+                    
                   ))}
+                  <option value="10+">+10 personnes</option>
                 </select>
               </div>
               <div>
@@ -471,7 +472,7 @@ const handleSubmit = (e: React.FormEvent) => {
                   onChange={handleChange}
                   className="form-input"
                 >
-                  {['12:00', '12:30', '13:00', '13:30', '14:00', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'].map(t => (
+                  {['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00', '12:30', '13:00', '13:30', '14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'].map(t => (
                     <option key={t} value={t}>{t}</option>
                   ))}
                 </select>
@@ -486,6 +487,7 @@ const handleSubmit = (e: React.FormEvent) => {
                 type="date"
                 name="date"
                 value={formData.date}
+                min={today}
                 onChange={handleChange}
                 required
                 className="form-input"
@@ -501,6 +503,7 @@ const handleSubmit = (e: React.FormEvent) => {
     </section>
   );
 }
+const today = new Date().toISOString().split("T")[0];
 
 function InstagramSection() {
   return (
@@ -589,7 +592,7 @@ function Location() {
 
           <div className="rounded-md overflow-hidden h-80 shadow-lg border border-gray-200" data-aos="fade-left">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2859.226945747352!2d4.639127!3d45.509944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f43f7e5e5e5e5d%3A0x123456789!2s15%20Rue%20Montgolfier%2C%2007100%20Annonay!5e0!3m2!1sfr!2sfr!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.3738499830743!2d4.670177875746879!3d45.240232448355094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5130993275905%3A0x96e7a8052759fe04!2sRestaurant%20Le%20D%C3%B4me!5e0!3m2!1sen!2stn!4v1769644129642!5m2!1sen!2stn"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -11,12 +11,12 @@ const APP_CONFIG = {
   cuisine: "Gastronomie Française d'Excellence",
   phone: "+33475670943",
   whatsapp: "+33475670943",
-  instagram: "https://instagram.com/lecielétoilé",
-  address: "15 Rue Montgolfier, 07100 Annonay",
+  instagram: "https://instagram.com/restaurantledome",
+  address: "2 Pl. des Cordeliers, 07100 Annonay, France",
   hours: {
-    weekday: "Mar-Jeu: 12h-14h & 19h-22h",
-    weekend: "Ven-Dim: 12h-14h & 19h-23h",
-    closed: "Lundi fermé"
+    weekday: "Lun-Mer: 12h-2:30h ",
+    weekend: "Jeu-Sam: 12h-14h & 19h-23h",
+    closed: "Dimanche fermé"
   },
   rating: 4.9,
   reviewCount: 156
@@ -28,9 +28,9 @@ function Hero() {
   };
 
   const handleTakeoutClick = () => {
-    const message = encodeURIComponent(`Bonjour, je souhaite commander chez ${APP_CONFIG.restaurant}`);
-    window.open(`https://wa.me/${APP_CONFIG.whatsapp.replace(/\D/g, '')}?text=${message}`);
-  };
+  window.location.href = 'https://menuledome.netlify.app/';
+};
+
 
   return (
     
@@ -196,10 +196,10 @@ function Menu() {
       ? dishes
       : dishes.filter(dish => dish.category === activeCategory);
 
-  const handleOrderClick = () => {
-    const message = encodeURIComponent(`Bonjour, je souhaite commander chez ${APP_CONFIG.restaurant}`);
-    window.open(`https://wa.me/${APP_CONFIG.whatsapp.replace(/\D/g, '')}?text=${message}`);
-  };
+ const handleOrderClick = () => {
+  window.location.href = 'https://menuledome.netlify.app/';
+};
+
 
   return (
     <section className="py-24 bg-gray-50">
@@ -275,11 +275,11 @@ function Menu() {
 function Gallery() {
   const gallery = [
     {
-      image: "https://imgur.com/a/QvPqruJ",
+      image: "./assets/dome.png",
       label: "Salle principale"
     },
     {
-      image: "https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: "./assets/plat.png",
       label: "Plat signature"
     },
     {
